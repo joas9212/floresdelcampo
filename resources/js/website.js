@@ -5,7 +5,7 @@ import '@slick_theme_scss'
 
 
 $(window).on("scroll",function() {
-    if ($(this).scrollTop() > 100) { // puedes cambiar el valor 100 a la altura que prefieras
+    if ($(this).scrollTop() > 100) { 
       $('#website_header_cart_sticky_contain').css({
         'opacity': '1',
         'visibility': 'visible'

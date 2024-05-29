@@ -12,7 +12,8 @@ export default defineConfig({
             ],
             refresh: true,
         }),
-    ],resolve: {
+    ],
+    resolve: {
         alias: {
           '@jquery': 'node_modules/jquery/dist/jquery.min.js',
           '@slick': 'node_modules/slick-carousel/slick/slick.min.js',

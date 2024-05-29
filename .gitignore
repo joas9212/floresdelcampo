@@ -1,23 +1,84 @@
-/vendor/
-node_modules/
-npm-debug.log
-yarn-error.log
+# Node modules
+/node_modules
 
-# Laravel 4 specific
-bootstrap/compiled.php
-app/storage/
+# Build assets
+/public/build
+/public/hot
 
-# Laravel 5 & Lumen specific
-public/storage
-public/hot
+# Local storage
+/public/storage
+/storage/*.key
+/storage/debugbar
 
-# Laravel 5 & Lumen specific with changed public path
-public_html/storage
-public_html/hot
+# Compiled classes and cached data
+/bootstrap/cache
 
-storage/*.key
+# Composer vendor directory
+/vendor
+
+# Environment variables
 .env
-Homestead.yaml
-Homestead.json
-/.vagrant
+.env.backup
+.env.production
+.env.local
+.env.testing
+
+# PHPUnit result cache
 .phpunit.result.cache
+
+# Homestead files
+Homestead.json
+Homestead.yaml
+
+# Various logs
+*.log
+npm-debug.log*
+yarn-error.log*
+
+# IDE specific files
+/.idea
+/.vscode
+/.fleet
+
+# Laravel Telescope
+/telescope
+
+# Laravel Horizon
+/horizon
+
+# Backup Manager
+/backup-manager
+
+# Ignored files for specific environments
+/.env.*.backup
+
+# Ignoring Laravel Mix manifest and node_modules
+/mix-manifest.json
+/yarn.lock
+/package-lock.json
+
+# Ignoring SASS cache files
+.sass-cache
+
+# Ignoring composer.lock if you don't want to lock dependencies
+/composer.lock
+
+# Ignoring Docker related files if using Docker
+/docker-compose.yml
+/.docker
+
+# Ignoring Ignition config (error handling and debugging)
+/ignition*
+
+# Ignoring specific database files
+*.sqlite
+
+# Ignoring Laravel IDE Helper files
+/_ide_helper.php
+/_ide_helper_models.php
+.phpstorm.meta.php
+
+# Ignoring other system-specific files
+Thumbs.db
+.DS_Store
+Desktop.ini

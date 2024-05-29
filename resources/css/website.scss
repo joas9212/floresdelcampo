@@ -1,0 +1,257 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+@import "bootstrap/scss/bootstrap";
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/utilities";
+
+$all-colors: map-merge-multiple($blues, $indigos, $purples, $pinks, $reds, $oranges, $yellows, $greens, $teals, $cyans);
+
+$utilities: map-merge(
+  $utilities,
+  (
+    "color": map-merge(
+      map-get($utilities, "color"),
+      (
+        values: map-merge(
+          map-get(map-get($utilities, "color"), "values"),
+          (
+            $all-colors
+          ),
+        ),
+      ),
+    ),
+    "background-color": map-merge(
+      map-get($utilities, "background-color"),
+      (
+        values: map-merge(
+          map-get(map-get($utilities, "background-color"), "values"),
+          (
+            $all-colors
+          ),
+        ),
+      ),
+    ),
+    "border-color": map-merge(
+      map-get($utilities, "border-color"),
+      (
+        values: map-merge(
+          map-get(map-get($utilities, "border-color"), "values"),
+          (
+            $all-colors
+          ),
+        ),
+      ),
+    ),
+  )
+);
+
+@import "bootstrap/scss/utilities/api";
+
+
+/* PREPARAR EL SITIO - CONFIGURACION INICIAL */
+
+// COLORES DE LA PALETA DE COLORES  
+$color_primario: #cf8d2e;
+$color_bg_primario: $gray-100;
+$color_texto_primario: #717171;
+$color_texto_secundario: #ffffff;
+
+#website_main {
+  height: auto;
+}
+
+* {
+    padding: 0%;
+    margin: 0%;
+    font-family: 'Raleway', sans-serif;
+    text-decoration: none;
+}
+
+
+
+/* INICIO DE ESTILOS HEADER */
+
+#website_header_menu ul , #website_header_menu a {
+  list-style: none;
+  text-decoration: none;
+  font-size: 13px;
+  color: $color_texto_primario;
+}
+
+#website_header_head {
+  align-items: center;;
+}
+
+#website_header_head #logo svg{
+  fill: black
+}
+
+#website_header_cart_contain , #website_header_cart_sticky_contain{
+  top: 0; 
+  height: 40px;
+}
+
+#website_header_cart_contain a, #website_header_cart_sticky_contain a{
+  height: 40px;
+  text-decoration: none;
+}
+
+#website_header_cart_icon, #website_header_cart_sticky_icon {
+  width: 45px;
+  align-items: center;
+  justify-content: center;
+  fill:$color_primario;
+}
+
+#website_header_cart_status, #website_header_cart_sticky_status {
+  font-family: 'Open Sans', sans-serif;
+  width: 170px;
+  min-width: 150px;
+  align-items: center;
+  justify-content: center;
+  background-color: $color_primario;
+  font-size: 12px;
+  color: $color_texto_secundario;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+#website_header_cart_sticky_contain {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.6s, visibility 0.6s;
+  right: 45px;
+  z-index: 1010;
+}
+
+/* FIN DE ESTILOS HEADER */
+
+/* INICIO DE ESTILOS NAV */
+
+nav {
+  top: 0; 
+  width: 100%; 
+  z-index: 1000; 
+  font-weight: bold;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+nav>div{
+  background-color: $color_bg_primario;
+  max-height: 66px;
+}
+
+#button_home{
+  background-color: $color_primario;
+  color: $color_texto_secundario;
+  text-decoration: none;
+  max-height: 66px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex; 
+  justify-content: center; 
+  padding: 0; 
+  margin: 0; 
+}
+
+nav ul li {
+  display: inline-block;
+  text-align: center; 
+  transition: color 0.5s;
+}
+
+nav ul a > li {
+  text-decoration: none;
+  color: $color_texto_primario;
+  border-right: 1px solid #dee2e6; 
+}
+
+nav ul a:hover > li{
+  color: $color_primario;
+}
+
+nav ul a:hover > li::after {
+  content: url(data:image/svg+xml;base64,PHN2ZyBjbGFzcz0idy02IGgtNiB0ZXh0LWdyYXktODAwIGRhcms6dGV4dC13aGl0ZSIgYXJpYS1oaWRkZW49InRydWUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjE1IiBoZWlnaHQ9IjE1IiBmaWxsPSIjY2Y4ZDJlIiB2aWV3Qm94PSIwIDAgMjQgMjQiPg0KICA8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik01LjU3NSAxMy43MjlDNC41MDEgMTUuMDMzIDUuNDMgMTcgNy4xMiAxN2g5Ljc2MmMxLjY5IDAgMi42MTgtMS45NjcgMS41NDQtMy4yNzFsLTQuODgxLTUuOTI3YTIgMiAwIDAgMC0zLjA4OCAwbC00Ljg4IDUuOTI3WiIgY2xpcC1ydWxlPSJldmVub2RkIi8+DQo8L3N2Zz4NCg==);
+  position: absolute;
+  top: 80%;
+  left: 42%;
+  display: block;
+}
+
+nav ul a:last-child > li{
+  border-right: none; 
+}
+
+nav + hr{
+  top:66px; 
+  color: $color_primario;
+  opacity: 0.9;
+  border-width: 4px;    
+  width: 100vw;
+}
+/* FIN DE ESTILOS NAV */
+
+
+
+/* INICIO DE ESTILOS FOOTER */
+
+footer {
+  background-color: $color_bg_primario;
+  padding: 20px 0;
+  color: $color_texto_primario;
+  font-size: 14px;
+  border-top: 1px solid #e9ecef;
+  text-decoration: none;
+  font-style: none;
+  list-style: none;
+}
+
+footer a, footer li{
+  color: $color_texto_primario;
+  text-decoration: none;
+  font-style: none;
+  line-height: 25px;
+}
+
+footer #logo {
+  align-items: center;
+  justify-content: center;
+}
+
+#container_rows_info>.row{
+  margin-left: 22px;
+  margin-right: auto;
+}
+
+/* FIN DE ESTILOS FOOTER */
+
+
+/* INICIO DE ESTILOS SECTION SLIDER*/
+
+#website_main_section_slider {
+  background-color: $color_bg_primario; 
+}
+
+#website_main_section_slider_best_sellers{
+  font-family: 'Raleway', sans-serif;
+  font-size: 12px;
+}
+/* FIN DE ESTILOS SECTION SECTION SLIDER*/
+
+
+/* INICIO DE ESTILOS SECTION STORE*/
+#website_main_section_store {
+  background-color: $color_bg_primario; 
+}
+
+
+
+/* FIN DE ESTILOS SECTION SECTION STORE*/

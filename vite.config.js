@@ -12,5 +12,12 @@ export default defineConfig({
             ],
             refresh: true,
         }),
-    ],
+    ],resolve: {
+        alias: {
+          '@jquery': 'node_modules/jquery/dist/jquery.min.js',
+          '@slick': 'node_modules/slick-carousel/slick/slick.min.js',
+          '@slick_scss': 'node_modules/slick-carousel/slick/slick.scss',
+          '@slick_theme_scss': 'node_modules/slick-carousel/slick/slick-theme.scss',
+        },
+      },
 });

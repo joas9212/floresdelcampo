@@ -1,5 +1,5 @@
 <nav class="container-xl mt-1 position-sticky">
-    <div class="border-top border-start border-end">
+    <div>
         <a href="{{route('home')}}" class="position-absolute">
             <div id="button_home" class="float-start h-100 d-inline-block px-4 py-4">
                 <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">

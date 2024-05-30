@@ -16,14 +16,19 @@ $(window).on("scroll",function() {
         'visibility': 'hidden'
       });
     }
-
-    $('.slider-main').slick({
-        lazyLoad: 'ondemand',
-        slidesToShow: 1,
-        slidesToScroll: 1, 
-        autoplay: true,
-        pauseOnFocus: false,
-        pauseOnHover: false,
-        autoplaySpeed: 5000,
-      });
   });
+
+  $(function() {
+    console.log('jQuery está funcionando!');
+    $('.slider-main').slick({
+      lazyLoad: 'ondemand',
+      slidesToShow: 1,
+      slidesToScroll: 1, 
+      autoplay: true,
+      pauseOnFocus: false,
+      pauseOnHover: false,
+      autoplaySpeed: 5000,
+      dots: false,
+      arrows: false,
+    });
+});

@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=width-device, initial-scale=1, scaleable=no">
+        <title>{{ config('app.name', 'Flores del Cultivo') }}</title>
         @vite('resources/css/website.scss')
         @vite('resources/js/website.js')
     </head>

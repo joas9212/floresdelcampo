@@ -1,12 +1,11 @@
 <section id="website_main_section_slider">
-    <div class="container-xl pt-4">
+    <div id="website_main_section_slider_content" class="container-xl pt-4">
         <div class="row">
             <div class="col-xxl-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 col-xs-12 ">
                 <div>
                     <div class="slider-main mx-0">
                         <div><img width="100%" src="{{ asset('img/1.jpg') }}"></div>
                         <div><img width="100%"src="{{ asset('img/2.jpg') }}"></div>
-                        <div><img width="100%"src="{{ asset('img/3.jpg') }}"></div>
                         <div><img width="100%"src="{{ asset('img/4.jpg') }}"></div>
                     </div>
                 </div>

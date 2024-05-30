@@ -56,13 +56,17 @@ $utilities: map-merge(
 /* PREPARAR EL SITIO - CONFIGURACION INICIAL */
 
 // COLORES DE LA PALETA DE COLORES  
-$color_primario: #cf8d2e;
+$color_primario: #E4C344;
 $color_bg_primario: $gray-100;
+$color_bg_secundario: #25252e; // #16161d
+$color_bg_terciario: $gray-100;
 $color_texto_primario: #717171;
 $color_texto_secundario: #ffffff;
+$color_borde_primario: #e5e5e5;
 
 #website_main {
   height: auto;
+  background-color: $color_bg_secundario;
 }
 
 * {
@@ -77,10 +81,10 @@ $color_texto_secundario: #ffffff;
 /* INICIO DE ESTILOS HEADER */
 
 #website_header_menu ul , #website_header_menu a {
+  color: $color_texto_secundario;
   list-style: none;
   text-decoration: none;
   font-size: 13px;
-  color: $color_texto_primario;
 }
 
 #website_header_head {
@@ -106,6 +110,7 @@ $color_texto_secundario: #ffffff;
   align-items: center;
   justify-content: center;
   fill:$color_primario;
+  background-color: white;
 }
 
 #website_header_cart_status, #website_header_cart_sticky_status {
@@ -195,27 +200,190 @@ nav + hr{
   color: $color_primario;
   opacity: 0.9;
   border-width: 4px;    
-  width: 100vw;
+  width: 100%;
 }
 /* FIN DE ESTILOS NAV */
 
+
+/* INICIO DE ESTILOS SECTION SLIDER*/
+
+#website_main_section_slider {
+  background-color: $color_bg_terciario;
+}
+
+#website_main_section_slider_content{
+  padding-bottom: 30px;
+}
+
+#website_main_section_slider_best_sellers{
+  font-family: 'Raleway', sans-serif;
+  font-size: 12px;
+}
+/* FIN DE ESTILOS SECTION SECTION SLIDER*/
+
+
+/* INICIO DE ESTILOS SECTION STORE*/
+#website_main_section_store {
+  background-color: $color_bg_terciario; 
+}
+
+#website_main_section_store_content {
+  background-color: white;
+  border: 1px solid $color_borde_primario;
+  width: 95% !important;
+}
+
+#website_main_section_store_content_row {
+  justify-content: center;
+}
+
+#website_main_section_store_content_row > .product_card {
+  flex: 0 0 222px; //390
+  height: 390px;
+  max-height: 390px;
+  border: 1px solid $color_borde_primario;
+  border-radius: 10px 10px 0 0;
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+#website_main_section_store_content_row > .product_card > .product_card_img{ 
+  height: 55%;
+  overflow: hidden;
+}
+
+#website_main_section_store_content_row > .product_card img{
+  object-fit: fill;
+  object-position: center;
+  transition: transform 0.4s ease;
+}
+
+#website_main_section_store_content_row > .product_card img:hover{
+  transform: scale(1.2);
+}
+
+#website_main_section_store_content_row .product_card > .product_card_info{
+  position: relative;
+  height: 45%;
+  font-family: 'Raleway', sans-serif;
+  font-size: 13px;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+#website_main_section_store_content_row .product_card > .product_card_info > button{
+  width: 100%; 
+  color: $color_texto_primario; 
+  background-color: transparent;
+  border-top: 1px solid $color_borde_primario;
+  border-left: none;
+  border-bottom: none;
+  border-right: none;
+  padding: 10px; 
+  text-align: center; 
+  text-decoration: none; 
+  display: inline-block;
+  cursor: pointer; 
+  position: absolute;
+  bottom: 0px;
+  transition: all 0.4s ease;
+}
+
+#website_main_section_store_content_row .product_card > .product_card_info h1 {
+  font-size: 14px;
+  padding-top: 20px;
+  letter-spacing: 0.5px;
+  transition: all 0.4s ease;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+}
+
+#website_main_section_store_content_row .product_card > .product_card_info p {
+  font-size: 16px;
+  padding-top: 25px;
+  letter-spacing: 0.5px;
+  transition: all 0.4s ease;
+  width: 100%;
+  text-align: center;
+}
+
+#website_main_section_store_content_row .product_card:hover > .product_card_info h1{
+  color: $color_primario;
+}
+
+#website_main_section_store_content_row .product_card:hover > .product_card_info button {
+  color: $color_primario;
+  background-color: $color_primario;
+  color: white;
+  font-weight: bold;
+}
+
+#website_main_section_store_aside {
+  position: relative;
+  font-family: 'Raleway', sans-serif;
+  font-size: 13px;
+  user-select: none;
+}
+
+#website_main_section_store_aside > .website_main_section_store_aside_filters{
+  border: 1px solid $color_borde_primario; 
+}
+
+#website_main_section_store_aside > .website_main_section_store_aside_filters > h1{
+  font-size: 13px;
+  border-bottom: 1px solid $color_borde_primario;
+  padding: 10px;
+  text-transform: uppercase;
+}
+
+#website_main_section_store_aside > .website_main_section_store_aside_filters > ul{
+  list-style: none;
+  text-decoration: none;
+  padding: 0px;
+}
+
+#website_main_section_store_aside > .website_main_section_store_aside_filters > ul > li > a{
+  width: 100%;
+  display: block;
+  padding-left: 20px;
+  padding-bottom: 2px;
+  padding-top: 2px;
+}
+
+#website_main_section_store_aside > .website_main_section_store_aside_filters > ul{
+  list-style: none;
+  text-decoration: none;
+  padding: 0px;
+}
+
+#website_main_section_store_aside > .website_main_section_store_aside_filters > ul a{
+  list-style: none;
+  text-decoration: none;
+  color: $color_texto_primario;
+}
+
+#website_main_section_store_aside > .website_main_section_store_aside_filters > ul a:hover{
+  color: $color_primario;
+}
+
+/* FIN DE ESTILOS SECTION SECTION STORE*/
 
 
 /* INICIO DE ESTILOS FOOTER */
 
 footer {
-  background-color: $color_bg_primario;
+  background-color: $color_bg_secundario;
   padding: 20px 0;
-  color: $color_texto_primario;
+  color: $color_texto_secundario;
   font-size: 14px;
-  border-top: 1px solid #e9ecef;
+  border-top: 1px solid $color_primario;
   text-decoration: none;
   font-style: none;
   list-style: none;
 }
 
 footer a, footer li{
-  color: $color_texto_primario;
+  color: white;
   text-decoration: none;
   font-style: none;
   line-height: 25px;
@@ -232,26 +400,3 @@ footer #logo {
 }
 
 /* FIN DE ESTILOS FOOTER */
-
-
-/* INICIO DE ESTILOS SECTION SLIDER*/
-
-#website_main_section_slider {
-  background-color: $color_bg_primario; 
-}
-
-#website_main_section_slider_best_sellers{
-  font-family: 'Raleway', sans-serif;
-  font-size: 12px;
-}
-/* FIN DE ESTILOS SECTION SECTION SLIDER*/
-
-
-/* INICIO DE ESTILOS SECTION STORE*/
-#website_main_section_store {
-  background-color: $color_bg_primario; 
-}
-
-
-
-/* FIN DE ESTILOS SECTION SECTION STORE*/

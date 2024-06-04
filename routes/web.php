@@ -32,4 +32,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::resource('productos', 'ProductosController');
+Route::resource('inventarios', 'InventariosController');
+Route::resource('vendedores', 'VendedoresController');
+Route::resource('proveedores', 'ProveedoresController');
+Route::resource('ventas', 'VentasController');
+Route::resource('pedidos', 'PedidosController');
+Route::resource('Paises', 'PaisesController');
+Route::resource('Ciudades', 'CiudadesController');
+
+
 require __DIR__.'/auth.php';

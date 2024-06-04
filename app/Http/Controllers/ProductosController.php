@@ -22,18 +22,16 @@ class ProductosController extends Controller
     {
         $producto = Producto::create($request->all());
     
-        if ($request->hasFile('imagenes')) {
-            foreach ($request->file('imagenes') as $imagen) {
-                $ruta = $imagen->store('imagenes');
-                $producto->imagenes()->create(['ruta' => $ruta]);
-            }
+        if ($request->has('imagenes')) {
+            $ruta = $request->file('imagenes')->store('imagenes');
+            $producto->imagenes()->create(['ruta' => $ruta]);
         }
 
         if ($request->has('ciudades')) {
             $producto->ciudades()->attach($request->input('ciudades'));
         }
     
-        return redirect()->route('productos.index');
+        return redirect()->route('dashboard')->with('success', '¡Producto Guardado!');;
     }
 
     public function edit(Producto $producto)

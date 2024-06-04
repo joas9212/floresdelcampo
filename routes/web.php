@@ -1,6 +1,14 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProductosController;
+use App\Http\Controllers\InventariosController;
+use App\Http\Controllers\ProveedoresController;
+use App\Http\Controllers\VendedoresController;
+use App\Http\Controllers\VentasController;
+use App\Http\Controllers\PedidosController;
+use App\Http\Controllers\PaisesController;
+use App\Http\Controllers\CiudadesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,14 +40,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('productos', 'ProductosController');
-Route::resource('inventarios', 'InventariosController');
-Route::resource('vendedores', 'VendedoresController');
-Route::resource('proveedores', 'ProveedoresController');
-Route::resource('ventas', 'VentasController');
-Route::resource('pedidos', 'PedidosController');
-Route::resource('Paises', 'PaisesController');
-Route::resource('Ciudades', 'CiudadesController');
+Route::resource('productos', ProductosController::class);
+Route::resource('inventarios', InventariosController::class);
+Route::resource('vendedores', VendedoresController::class);
+Route::resource('proveedores', ProveedoresController::class);
+Route::resource('ventas',  VentasController::class);
+Route::resource('pedidos', PedidosController::class);
+Route::resource('Paises', PaisesController::class);
+Route::resource('Ciudades', CiudadesController::class);
 
 
 require __DIR__.'/auth.php';

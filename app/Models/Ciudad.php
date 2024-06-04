@@ -14,4 +14,9 @@ class Ciudad extends Model
     {
         return $this->belongsTo(Pais::class);
     }
+
+    public function productos()
+    {
+        return $this->belongsToMany(Producto::class);
+    }
 }

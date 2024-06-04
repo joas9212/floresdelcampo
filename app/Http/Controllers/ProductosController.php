@@ -20,8 +20,20 @@ class ProductosController extends Controller
 
     public function store(Request $request)
     {
-        Producto::create($request->all());
-        return redirect()->route('productos.index')->with('success', 'Producto creado exitosamente');
+        $producto = Producto::create($request->all());
+    
+        if ($request->hasFile('imagenes')) {
+            foreach ($request->file('imagenes') as $imagen) {
+                $ruta = $imagen->store('imagenes');
+                $producto->imagenes()->create(['ruta' => $ruta]);
+            }
+        }
+
+        if ($request->has('ciudades')) {
+            $producto->ciudades()->attach($request->input('ciudades'));
+        }
+    
+        return redirect()->route('productos.index');
     }
 
     public function edit(Producto $producto)
@@ -32,7 +44,23 @@ class ProductosController extends Controller
     public function update(Request $request, Producto $producto)
     {
         $producto->update($request->all());
-        return redirect()->route('productos.index')->with('success', 'Producto actualizado exitosamente');
+    
+        $producto->imagenes()->delete();
+    
+        if ($request->hasFile('imagenes')) {
+            foreach ($request->file('imagenes') as $imagen) {
+                $ruta = $imagen->store('imagenes');
+                $producto->imagenes()->create(['ruta' => $ruta]);
+            }
+        }
+    
+        if ($request->has('ciudades')) {
+            $producto->ciudades()->sync($request->input('ciudades'));
+        } else {
+            $producto->ciudades()->detach();
+        }
+        
+        return redirect()->route('productos.index');
     }
 
     public function destroy(Producto $producto)

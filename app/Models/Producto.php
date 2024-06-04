@@ -18,4 +18,14 @@ class Producto extends Model
     {
         return $this->hasMany(Venta::class);
     }
+
+    public function imagenes()
+    {
+        return $this->hasMany(Imagen::class);
+    }
+
+    public function ciudades()
+    {
+        return $this->belongsToMany(Ciudad::class);
+    }
 }

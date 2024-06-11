@@ -4,7 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\InventariosController;
 use App\Http\Controllers\ProveedoresController;
-use App\Http\Controllers\VendedoresController;
+use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\VentasController;
 use App\Http\Controllers\PedidosController;
 use App\Http\Controllers\PaisesController;
@@ -42,7 +42,7 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('productos', ProductosController::class);
 Route::resource('inventarios', InventariosController::class);
-Route::resource('vendedores', VendedoresController::class);
+Route::resource('clientes', ClientesController::class);
 Route::resource('proveedores', ProveedoresController::class);
 Route::resource('ventas',  VentasController::class);
 Route::resource('pedidos', PedidosController::class);

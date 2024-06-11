@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Vendedor extends Model
+class Cliente extends Model
 {
-    protected $fillable = ['nombre', 'email'];
+    protected $table = 'clientes';
+
+    protected $fillable = ['nombre', 'email', 'telefono'];
 
     public function ventas()
     {

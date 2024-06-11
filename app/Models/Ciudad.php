@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ciudad extends Model
 {
+
+    protected $table = 'ciudades';
+
     protected $fillable = ['nombre', 'pais_id'];
 
     public function pais()
@@ -18,5 +21,15 @@ class Ciudad extends Model
     public function productos()
     {
         return $this->belongsToMany(Producto::class);
+    }
+
+    public function pedidos()
+    {
+        return $this->belongsToMany(Pedido::class);
+    }
+
+    public function venta()
+    {
+        return $this->belongsTo(Venta::class);
     }
 }

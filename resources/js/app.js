@@ -10,9 +10,14 @@ Alpine.start();
 
 
 $(function() {
+    
+    $('#ControlSelect2Cities').select2({
+        placeholder: "Seleccione las ciudades en las que esta disponible",
+        allowClear: true
+    });
 
-    $('.select2').select2({
-        placeholder: "Seleccione la ciudad en la que esta disponible",
+    $('#ControlSelect2Categories').select2({
+        placeholder: "Seleccione las categorias a la que pertenece",
         allowClear: true
     });
 
@@ -29,4 +34,5 @@ $(function() {
             reader.readAsDataURL(fileInput.files[0]);
         }
     });
+
 });

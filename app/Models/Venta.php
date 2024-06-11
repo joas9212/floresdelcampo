@@ -7,20 +7,49 @@ use Illuminate\Database\Eloquent\Model;
 
 class Venta extends Model
 {
-    protected $fillable = ['producto_id', 'vendedor_id', 'precio', 'estado'];
+    protected $fillable = ['producto_id', 
+                            'user_id',
+                            'cliente_id', 
+                            'ciudad_id', 
+                            'Comprobante_id',
+                            'precio',
+                            'cantidad',
+                            'metodo_pago',
+                            'valor_total', 
+                            'estado'];
 
     public function producto()
     {
         return $this->belongsTo(Producto::class);
     }
 
-    public function vendedor()
+    public function user()
     {
-        return $this->belongsTo(Vendedor::class);
+        return $this->belongsTo(User::class);
+    }
+
+    public function cliente()
+    {
+        return $this->belongsTo(Cliente::class);
+    }
+    
+    public function metodo_pago()
+    {
+        return $this->belongsTo(MetodoPago::class);
+    }
+    
+    public function ciudad()
+    {
+        return $this->belongsTo(Ciudad::class);
     }
 
     public function pedido()
     {
         return $this->hasOne(Pedido::class);
+    }
+
+    public function comprobantes()
+    {
+        return $this->hasMany(Comprobante::class);
     }
 }

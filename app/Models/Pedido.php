@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pedido extends Model
 {
-    protected $fillable = ['venta_id', 'proveedor_id', 'estado'];
+    protected $fillable = ['venta_id', 'proveedor_id', 'ciudad_id',  'estado'];
 
     public function venta()
     {
@@ -17,5 +17,10 @@ class Pedido extends Model
     public function proveedor()
     {
         return $this->belongsTo(Proveedor::class);
+    }
+
+    public function ciudad()
+    {
+        return $this->belongsTo(Ciudad::class);
     }
 }

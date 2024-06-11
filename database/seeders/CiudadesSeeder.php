@@ -17,6 +17,8 @@ class CiudadesSeeder extends Seeder
     public function run()
     {
         $ciudades = [
+            ['nombre' => 'Todas', 'pais_id' => 1],
+            ['nombre' => 'Ninguna', 'pais_id' => 1],
             ['nombre' => 'Bogotá', 'pais_id' => 1],
             ['nombre' => 'Cali', 'pais_id' => 1]
         ];

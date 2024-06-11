@@ -28,5 +28,10 @@ class Producto extends Model
     {
         return $this->hasMany(Venta::class);
     }
+    
+    public function categorias()
+    {
+        return $this->belongsToMany(Categoria::class);
+    }
 
 }

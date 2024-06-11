@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Producto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductosController extends Controller
 {
@@ -18,21 +19,42 @@ class ProductosController extends Controller
         return view('productos.create');
     }
 
+
     public function store(Request $request)
     {
-        $producto = Producto::create($request->all());
-    
-        if ($request->has('imagenes')) {
-            $ruta = $request->file('imagenes')->store('imagenes');
-            $producto->imagenes()->create(['ruta' => $ruta]);
-        }
+        try {
+            DB::beginTransaction();
 
-        if ($request->has('ciudades')) {
-            $producto->ciudades()->attach($request->input('ciudades'));
+            $producto = Producto::create($request->all());
+
+            if ($request->has('imagenes')) {
+                $ruta = $request->file('imagenes')->store('imagenes');
+                $producto->imagenes()->create(['ruta' => $ruta]);
+            }
+
+            if ($request->has('ciudades')) {
+                $producto->ciudades()->attach($request->input('ciudades'));
+            }
+
+            if ($request->has('categorias')) {
+                $producto->categorias()->attach($request->input('categorias'));
+            }
+
+            DB::commit();
+
+            return redirect()->route('dashboard')->with([
+                'success' => '¡Producto Guardado!',
+                'action' => 1 // Indica que la acción fue ingresar un producto
+            ]);
+        } catch (Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->withInput()->withErrors([
+                'error' => 'Ha ocurrido un error al guardar el producto. Por favor, inténtalo de nuevo.',
+                'action' => 1 // Indica que la acción fue ingresar un producto
+            ]);
         }
-    
-        return redirect()->route('dashboard')->with('success', '¡Producto Guardado!');;
     }
+
 
     public function edit(Producto $producto)
     {

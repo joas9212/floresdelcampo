@@ -15,6 +15,18 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Tablero') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('new_product')" :active="request()->routeIs('new_product')">
+                        {{ __('Nuevo Producto') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('register_sale')" :active="request()->routeIs('register_sale')">
+                        {{ __('Registrar Venta') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('sale_list')" :active="request()->routeIs('sale_list')">
+                        {{ __('Listado de ventas') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('order_list')" :active="request()->routeIs('order_list')">
+                        {{ __('Listado de pedidos') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -68,7 +80,19 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+                {{ __('Tablero') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('new_product')" :active="request()->routeIs('new_product')">
+                {{ __('Nuevo producto') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('register_sale')" :active="request()->routeIs('register_sale')">
+                {{ __('Registrar Venta') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('sale_list')" :active="request()->routeIs('sale_list')">
+                {{ __('Listado de ventas') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('order_list')" :active="request()->routeIs('order_list')">
+                {{ __('Listado de pedidos') }}
             </x-responsive-nav-link>
         </div>
 
@@ -81,7 +105,7 @@
 
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
+                    {{ __('Mi perfil') }}
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->
@@ -91,7 +115,7 @@
                     <x-responsive-nav-link :href="route('logout')"
                             onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                        {{ __('Log Out') }}
+                        {{ __('Cerrar sesión') }}
                     </x-responsive-nav-link>
                 </form>
             </div>

@@ -14,9 +14,9 @@ class Pedido extends Model
         return $this->belongsTo(Venta::class);
     }
 
-    public function proveedor()
+    public function user()
     {
-        return $this->belongsTo(Proveedor::class);
+        return $this->belongsTo(User::class);
     }
 
     public function ciudad()

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('venta_id')->constrained('ventas')->onDelete('cascade');
             $table->foreignId('ciudad_id')->constrained('ciudades');
-            $table->foreignId('proveedor_id')->constrained('proveedores')->onDelete('cascade');
+            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade');
             $table->string('nombre_destinatario');
             $table->string('numero_contacto_destinatario');
             $table->string('direccion_destionatario');

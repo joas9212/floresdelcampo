@@ -13,6 +13,18 @@ class PedidosController extends Controller
         return view('pedidos.index', compact('pedidos'));
     }
 
+    public function indexById(Request $request)
+    {
+        $findOrderById = Pedido::where('id', $request->pedido_id)->get();
+        if (empty($findOrderById[0])) {
+            return redirect()->back()->withInput()->with([
+                'error' => "No se encontró el pedido con ID: " . $request->pedido_id
+            ]);
+        }
+
+        return view('layouts.app.order_list', compact('findOrderById'));
+    }
+
     public function create()
     {
         return view('pedidos.create');

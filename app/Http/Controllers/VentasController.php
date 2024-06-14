@@ -18,6 +18,18 @@ class VentasController extends Controller
         return view('ventas.index', compact('ventas'));
     }
 
+    public function indexById(Request $request)
+    {
+        $findSaleById = Venta::where('id', $request->venta_id)->get();
+        if (empty($findSaleById[0])) {
+            return redirect()->back()->withInput()->with([
+                'error' => "No se encontró la venta con ID: " . $request->venta_id
+            ]);
+        }
+
+        return view('layouts.app.sale_list', compact('findSaleById'));
+    }
+
     public function create()
     {
         return view('ventas.create');
@@ -56,7 +68,7 @@ class VentasController extends Controller
             $pedido = new Pedido();
             $pedido->venta_id = $venta->id;
             $pedido->ciudad_id = $request->input('ciudad_id');
-            $pedido->proveedor_id = 1; // Proveedor predeterminado (cambiar si es necesario)
+            $pedido->user_id = null;
             $pedido->nombre_destinatario = $request->input('nombre_destinatario');
             $pedido->numero_contacto_destinatario = $request->input('numero_contacto_destinatario');
             $pedido->direccion_destionatario = $request->input('direccion_destionatario');
@@ -82,15 +94,13 @@ class VentasController extends Controller
 
             DB::commit();
 
-            return redirect()->route('dashboard')->with([
-                'success' => '¡Venta realizada correctamente!',
-                'action' => 2, // Indica que la acción fue para registrar una venta
+            return redirect()->route('register_sale')->with([
+                'success' => '¡Venta realizada correctamente!'
             ]);
         } catch (Exception $e) {
             DB::rollBack();
             return redirect()->back()->withInput()->withErrors(['
-                error' => 'Ha ocurrido un error al registrar la venta. Por favor, inténtalo de nuevo.',
-                'action' => 2, // Indica que la acción fue para registrar una venta
+                error' => 'Ha ocurrido un error al registrar la venta. Por favor, inténtalo de nuevo.'
             ]);
         }
     }

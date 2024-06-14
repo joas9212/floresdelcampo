@@ -42,15 +42,13 @@ class ProductosController extends Controller
 
             DB::commit();
 
-            return redirect()->route('dashboard')->with([
-                'success' => '¡Producto Guardado!',
-                'action' => 1 // Indica que la acción fue ingresar un producto
+            return redirect()->route('new_product')->with([
+                'success' => '¡Producto Guardado!'
             ]);
         } catch (Exception $e) {
             DB::rollBack();
             return redirect()->back()->withInput()->withErrors([
-                'error' => 'Ha ocurrido un error al guardar el producto. Por favor, inténtalo de nuevo.',
-                'action' => 1 // Indica que la acción fue ingresar un producto
+                'error' => 'Ha ocurrido un error al guardar el producto. Por favor, inténtalo de nuevo.'
             ]);
         }
     }

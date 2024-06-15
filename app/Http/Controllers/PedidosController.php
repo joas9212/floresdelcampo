@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pedido;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PedidosController extends Controller
 {
@@ -38,13 +39,24 @@ class PedidosController extends Controller
 
     public function edit(Pedido $pedido)
     {
-        return view('pedidos.edit', compact('pedido'));
+        return view('layouts.app.order_edit', compact('pedido'));
     }
 
     public function update(Request $request, Pedido $pedido)
     {
-        $pedido->update($request->all());
-        return redirect()->route('pedidos.index')->with('success', 'Pedido actualizado exitosamente');
+        try {
+            DB::beginTransaction();
+            $pedido->update($request->all());
+            
+            DB::commit();
+
+            return redirect()->route('order_list')->with('success', 'Pedido actualizado exitosamente');
+        } catch (Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->withInput()->withErrors([
+                'error' => 'Ha ocurrido un error al actualizar el pedido. Por favor, inténtalo de nuevo.'
+            ]);
+        }
     }
 
     public function destroy(Pedido $pedido)

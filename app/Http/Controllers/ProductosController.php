@@ -28,7 +28,7 @@ class ProductosController extends Controller
             $producto = Producto::create($request->all());
 
             if ($request->has('imagenes')) {
-                $ruta = $request->file('imagenes')->store('imagenes');
+                $ruta = $request->file('imagenes')->store('imagenes', 'public');
                 $producto->imagenes()->create(['ruta' => $ruta]);
             }
 
@@ -56,34 +56,57 @@ class ProductosController extends Controller
 
     public function edit(Producto $producto)
     {
-        return view('productos.edit', compact('producto'));
+        return view('layouts.app.product_edit', compact('producto'));
     }
 
     public function update(Request $request, Producto $producto)
     {
-        $producto->update($request->all());
-    
-        $producto->imagenes()->delete();
-    
-        if ($request->hasFile('imagenes')) {
-            foreach ($request->file('imagenes') as $imagen) {
-                $ruta = $imagen->store('imagenes');
+        try {
+            DB::beginTransaction();
+            $producto->update($request->all());
+        
+            if ($request->has('imagenes')) {
+                $ruta = $request->file('imagenes')->store('imagenes', 'public');
                 $producto->imagenes()->create(['ruta' => $ruta]);
             }
-        }
-    
-        if ($request->has('ciudades')) {
-            $producto->ciudades()->sync($request->input('ciudades'));
-        } else {
-            $producto->ciudades()->detach();
-        }
         
-        return redirect()->route('productos.index');
+            if ($request->has('ciudades')) {
+                $producto->ciudades()->sync($request->input('ciudades'));
+            } else {
+                $producto->ciudades()->detach();
+            }
+
+            if ($request->has('categorias')) {
+                $producto->categorias()->sync($request->input('categorias'));
+            } else {
+                $producto->categorias()->detach();
+            }
+            
+            DB::commit();
+
+            return redirect()->route('product_list')->with([
+                'success' => '¡Producto Actualizado!'
+            ]);
+        } catch (Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->withInput()->withErrors([
+                'error' => 'Ha ocurrido un error al actializar el producto. Por favor, inténtalo de nuevo.'
+            ]);
+        }
     }
 
     public function destroy(Producto $producto)
     {
-        $producto->delete();
-        return redirect()->route('productos.index')->with('success', 'Producto eliminado exitosamente');
+        try {
+            DB::beginTransaction();
+            $producto->delete();
+            DB::commit();
+            return redirect()->route('product_list')->with('success', 'Producto eliminado exitosamente');
+        } catch (Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->withInput()->withErrors([
+                'error' => 'Ha ocurrido un error al acteliminar el producto. Por favor, inténtalo de nuevo.'
+            ]);
+        }
     }
 }

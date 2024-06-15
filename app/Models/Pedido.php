@@ -7,7 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pedido extends Model
 {
-    protected $fillable = ['venta_id', 'proveedor_id', 'ciudad_id',  'estado'];
+    protected $fillable = ['venta_id', 
+                            'proveedor_id', 
+                            'ciudad_id',  
+                            'estado',
+                            'nombre_destinatario',
+                            'numero_contacto_destinatario',
+                            'direccion_destionatario',
+                            'mensaje_dedicatoria',
+                            'observaciones',
+                            'fecha_envio',
+                            'costo_envio',];
 
     public function venta()
     {

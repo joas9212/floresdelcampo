@@ -12,20 +12,26 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" :show="true">
                         {{ __('Tablero') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('new_product')" :active="request()->routeIs('new_product')">
+                    <x-nav-link :href="route('new_product')" :active="request()->routeIs('new_product')" :show="Auth::user()->rol == 'Administrador'">
                         {{ __('Nuevo Producto') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('register_sale')" :active="request()->routeIs('register_sale')">
-                        {{ __('Registrar Venta') }}
+                    <x-nav-link :href="route('register_sale')" :active="request()->routeIs('register_sale')" :show="Auth::user()->rol == 'Administrador' or Auth::user()->rol == 'Vendedor'">
+                        {{ __('Nueva Venta') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('sale_list')" :active="request()->routeIs('sale_list')">
-                        {{ __('Listado de ventas') }}
+                    <x-nav-link :href="route('product_list')" :active="request()->routeIs('product_list')" :show="true">
+                        {{ __('Catálogo') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('order_list')" :active="request()->routeIs('order_list')">
-                        {{ __('Listado de pedidos') }}
+                    <x-nav-link :href="route('sale_list')" :active="request()->routeIs('sale_list')" :show="Auth::user()->rol == 'Administrador' or Auth::user()->rol == 'Vendedor'">
+                        {{ __('Ventas') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('order_list')" :active="request()->routeIs('order_list')" :show="Auth::user()->rol == 'Administrador' or Auth::user()->rol == 'Aliado'">
+                        {{ __('Pedidos') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('admin_panel')" :active="request()->routeIs('admin_panel')" :show="Auth::user()->rol == 'Administrador'">
+                        {{ __('Administración') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -79,20 +85,26 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" :show="true">
                 {{ __('Tablero') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('new_product')" :active="request()->routeIs('new_product')">
+            <x-responsive-nav-link :href="route('new_product')" :active="request()->routeIs('new_product')" :show="Auth::user()->rol == 'Administrador'">>
                 {{ __('Nuevo producto') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('register_sale')" :active="request()->routeIs('register_sale')">
-                {{ __('Registrar Venta') }}
+            <x-responsive-nav-link :href="route('register_sale')" :active="request()->routeIs('register_sale')" :show="Auth::user()->rol == 'Administrador' or Auth::user()->rol == 'Vendedor'">
+                {{ __('Nueva Venta') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('sale_list')" :active="request()->routeIs('sale_list')">
-                {{ __('Listado de ventas') }}
+            <x-responsive-nav-link :href="route('product_list')" :active="request()->routeIs('product_list')" :show="true">>
+                {{ __('Catálogo') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('order_list')" :active="request()->routeIs('order_list')">
-                {{ __('Listado de pedidos') }}
+            <x-responsive-nav-link :href="route('sale_list')" :active="request()->routeIs('sale_list')" :show="Auth::user()->rol == 'Administrador' or Auth::user()->rol == 'Vendedor'">>
+                {{ __('Ventas') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('order_list')" :active="request()->routeIs('order_list')" :show="Auth::user()->rol == 'Administrador' or Auth::user()->rol == 'Aliado'">>
+                {{ __('Pedidos') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin_panel')" :active="request()->routeIs('admin_panel')" :show="Auth::user()->rol == 'Administrador'">>
+                {{ __('Administración') }}
             </x-responsive-nav-link>
         </div>
 

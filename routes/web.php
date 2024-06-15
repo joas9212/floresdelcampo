@@ -9,6 +9,7 @@ use App\Http\Controllers\VentasController;
 use App\Http\Controllers\PedidosController;
 use App\Http\Controllers\PaisesController;
 use App\Http\Controllers\CiudadesController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,20 +37,28 @@ Route::get('/dashboard', function () {
 
 Route::get('/new_product', function () {
     return view('layouts.app.new_product');
-})->middleware(['auth', 'verified'])->name('new_product');
+})->middleware(['auth', 'verified', 'admin'])->name('new_product');
 //})->middleware(['auth', 'verified', 'admin'])->name('new_product');
 
 Route::get('/register_sale', function () {
     return view('layouts.app.register_sale');
-})->middleware(['auth', 'verified'])->name('register_sale');
+})->middleware(['auth', 'verified', 'seller'])->name('register_sale');
+
+Route::get('/product_list', function () {
+    return view('layouts.app.product_list');
+})->middleware(['auth', 'verified'])->name('product_list');
 
 Route::get('/sale_list', function () {
     return view('layouts.app.sale_list');
-})->middleware(['auth', 'verified'])->name('sale_list');
+})->middleware(['auth', 'verified', 'seller'])->name('sale_list');
 
 Route::get('/order_list', function () {
     return view('layouts.app.order_list');
-})->middleware(['auth', 'verified'])->name('order_list');
+})->middleware(['auth', 'verified', 'partner'])->name('order_list');
+
+Route::get('/admin_panel', function () {
+    return view('layouts.app.admin_panel');
+})->middleware(['auth', 'verified', 'admin'])->name('admin_panel');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -63,10 +72,11 @@ Route::resource('clientes', ClientesController::class);
 Route::resource('proveedores', ProveedoresController::class);
 Route::resource('pedidos', PedidosController::class);
 Route::get('/pedidosById', [PedidosController::class, 'indexById'])->name('pedidos.indexById');
-Route::resource('Paises', PaisesController::class);
-Route::resource('Ciudades', CiudadesController::class);
+Route::resource('paises', PaisesController::class);
+Route::resource('ciudades', CiudadesController::class);
 Route::resource('ventas',  VentasController::class);
 Route::get('/ventasById', [VentasController::class, 'indexById'])->name('ventas.indexById');
+Route::resource('/users', UserController::class);
 
 
 require __DIR__.'/auth.php';

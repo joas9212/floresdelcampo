@@ -64,7 +64,7 @@
                         <div class="p-6 text-gray-900 text-size-22">
                             <div class="container">
                                 <h3 class="text-lg font-medium text-gray-700 mb-4">{{$key}}</h3>
-                                <table class="table" style="font-size: 12px">
+                                <table class="table table-bordered" style="font-size: 12px">
                                     <thead>
                                         <tr>
                                             <th>ID</th>
@@ -78,7 +78,9 @@
                                             <th>Fecha de recepción</th>
                                             <th>Costo de envio</th>
                                             <th>Aliado Asignado</th>
-                                            <th>Acciones</th>
+                                            @if (Auth::user()->rol == 'Administrador' or $key == 'Pedidos Creados por mi')
+                                                <th>Acciones</th>
+                                            @endif
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -101,9 +103,12 @@
                                                         {{$order->user->name}}
                                                     @endif
                                                 </th>
-                                                <th>
-                                                    <a href="{{ route('productos.edit', $order->id) }}" class="btn btn-primary">Editar</a>
-                                                </th>
+                                                @if (Auth::user()->rol == 'Administrador' 
+                                                        or (Auth::user()->rol == 'Aliado' and ($order->user == Auth::user() and ($key == 'Pedidos Creados por mi' or $key == 'Pedido') and $order->estado == 'Pendiente')))
+                                                    <th>
+                                                        <a href="{{ route('pedidos.edit', $order->id) }}" class="btn btn-primary">Editar</a>
+                                                    </th>
+                                                @endif
                                             </tr>
                                         @endforeach
                                     </tbody>

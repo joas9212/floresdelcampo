@@ -61,7 +61,7 @@
                         <div class="p-6 text-gray-900 text-size-22">
                             <div class="container">
                                 <h3 class="text-lg font-medium text-gray-700 mb-4">{{$key}}</h3>
-                                <table class="table" style="font-size: 12px">
+                                <table class="table table-bordered" style="font-size: 12px">
                                     <thead>
                                         <tr>
                                             <th>ID</th>
@@ -76,7 +76,9 @@
                                             <th>Total con envio</th>
                                             <th>Comprobantes de pago</th>
                                             <th>Estado</th>
-                                            <th>Acciones</th>
+                                            @if (Auth::user()->rol == 'Administrador' or $key == 'Mis ventas')
+                                                <th>Acciones</th>
+                                            @endif
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -102,9 +104,13 @@
                                                     @endforeach
                                                 </td>
                                                 <td>{{ $venta->estado }}</td>
-                                                <td>
-                                                    <a href="{{ route('ventas.edit', $venta->id) }}" class="btn btn-primary">Editar</a>
-                                                </td>
+                                                @if (Auth::user()->rol == 'Administrador' 
+                                                        or (Auth::user()->rol == 'Vendedor' and ($venta->user == Auth::user() and ($key == 'Mis ventas' or $key == 'Venta') and $venta->estado == 'Pendiente')))
+                                                    <td>
+                                                        <a href="{{ route('ventas.edit', $venta->id) }}" class="btn btn-primary">Editar</a>
+                                                        
+                                                    </td>
+                                                @endif
                                             </tr>
                                         @endforeach
                                     </tbody>

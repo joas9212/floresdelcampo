@@ -10,6 +10,7 @@ use App\Http\Controllers\PedidosController;
 use App\Http\Controllers\PaisesController;
 use App\Http\Controllers\CiudadesController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CategoriasController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -77,6 +78,7 @@ Route::resource('ciudades', CiudadesController::class);
 Route::resource('ventas',  VentasController::class);
 Route::get('/ventasById', [VentasController::class, 'indexById'])->name('ventas.indexById');
 Route::resource('/users', UserController::class);
+Route::resource('/categorias', CategoriasController::class);
 
 
 require __DIR__.'/auth.php';

@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('observaciones');
             $table->datetime('fecha_envio');
             $table->decimal('costo_envio', 8, 2);
-            $table->enum('estado', ['Pendiente', 'Aceptado', 'Rechazado'])->default('Pendiente');
+            $table->enum('estado', ['Procesando', 'Preparando', 'Transito', 'Entregado'])->default('Procesando');
             $table->timestamps();
         });
     }

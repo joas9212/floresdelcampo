@@ -24,7 +24,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{__('Bienvenido ') . Auth::user()->name}}
+            {{__('Listado de ventas') }}
         </h2>
     </x-slot>
 
@@ -76,9 +76,7 @@
                                             <th>Total con envio</th>
                                             <th>Comprobantes de pago</th>
                                             <th>Estado</th>
-                                            @if (Auth::user()->rol == 'Administrador' or $key == 'Mis ventas')
-                                                <th>Acciones</th>
-                                            @endif
+                                            <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -104,13 +102,14 @@
                                                     @endforeach
                                                 </td>
                                                 <td>{{ $venta->estado }}</td>
-                                                @if (Auth::user()->rol == 'Administrador' 
+                                                <td>
+                                                    @if (Auth::user()->rol == 'Administrador' 
                                                         or (Auth::user()->rol == 'Vendedor' and ($venta->user == Auth::user() and ($key == 'Mis ventas' or $key == 'Venta') and $venta->estado == 'Pendiente')))
-                                                    <td>
                                                         <a href="{{ route('ventas.edit', $venta->id) }}" class="btn btn-primary">Editar</a>
-                                                        
-                                                    </td>
-                                                @endif
+                                                    @else   
+                                                        No permitido
+                                                    @endif
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>

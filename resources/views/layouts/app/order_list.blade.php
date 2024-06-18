@@ -5,14 +5,12 @@
     
     if(empty($findOrderById)){
 
-        $myOrders = Pedido::whereHas('venta', function($query) {
-            $query->where('user_id', Auth::user()->id)->where('estado', 'Aprobada'); 
-        })->paginate(10, ['*'], 'propios_page');
+        $myOrders = Pedido::where('user_id', Auth::user()->id)->paginate(10, ['*'], 'propios_page');
 
         $orders = Pedido::whereHas('venta', function($query) {
             $query->where('estado', 'Aprobada');})->paginate(10, ['*'], 'todos_page');
 
-        $arrayOrders = ['Pedidos Creados por mi' => $myOrders,
+        $arrayOrders = ['Pedidos Asignados a mi' => $myOrders,
                         'Pedidos Todos' => $orders];
 
     }else if(!empty($findOrderById)){
@@ -27,7 +25,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{__('Bienvenido ') . Auth::user()->name}}
+            {{__('Listado de pedidos ') }}
         </h2>
     </x-slot>
 
@@ -78,9 +76,8 @@
                                             <th>Fecha de recepción</th>
                                             <th>Costo de envio</th>
                                             <th>Aliado Asignado</th>
-                                            @if (Auth::user()->rol == 'Administrador' or $key == 'Pedidos Creados por mi')
-                                                <th>Acciones</th>
-                                            @endif
+                                            <th>Estado</th>
+                                            <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -98,17 +95,20 @@
                                                 <th>{{$order->costo_envio}}</th>
                                                 <th>
                                                     @if(empty($order->user->name))
-                                                        Sin asignar
+                                                    Sin asignar
                                                     @else
-                                                        {{$order->user->name}}
+                                                    {{$order->user->name}}
                                                     @endif
                                                 </th>
-                                                @if (Auth::user()->rol == 'Administrador' 
-                                                        or (Auth::user()->rol == 'Aliado' and ($order->user == Auth::user() and ($key == 'Pedidos Creados por mi' or $key == 'Pedido') and $order->estado == 'Pendiente')))
-                                                    <th>
+                                                <th>{{$order->estado}}</th>
+                                                <th>
+                                                    @if (Auth::user()->rol == 'Administrador' 
+                                                        or (Auth::user()->rol == 'Aliado' and ($order->user == Auth::user() and ($key == 'Pedidos Asignados a mi' or $key == 'Pedido') and $order->venta->estado == 'Aprobada')))
                                                         <a href="{{ route('pedidos.edit', $order->id) }}" class="btn btn-primary">Editar</a>
-                                                    </th>
-                                                @endif
+                                                    @else
+                                                        No permitido
+                                                    @endif
+                                                </th>
                                             </tr>
                                         @endforeach
                                     </tbody>

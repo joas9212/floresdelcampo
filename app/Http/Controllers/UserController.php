@@ -34,12 +34,16 @@ class UserController extends Controller
             User::create([
                 'name' => $request->name,
                 'email' => $request->email,
+                'rol' => $request->rol,
                 'password' => Hash::make($request->password),
             ]);
 
             DB::commit();
 
-            return redirect()->route('admin_panel')->with('success', 'Usuario registrado correctamente!');
+            return redirect()->route('admin_panel')->with([
+                'success' => 'Usuario registrado correctamente!',
+                'tab' => '1',
+            ]);
         } catch (Exception $e) {
             DB::rollBack();
             return redirect()->back()->withInput()->withErrors(['error' => 'Ha ocurrido un error al registrar el usuario. Por favor, inténtalo de nuevo.']);
@@ -76,7 +80,10 @@ class UserController extends Controller
 
             DB::commit();
 
-            return redirect()->route('admin_panel')->with('success', 'Usuario actualizado correctamente!');
+            return redirect()->route('admin_panel')->with([
+                'success' => 'Usuario actualizado correctamente!',
+                'tab' => '2',
+            ]);
         } catch (Exception $e) {
             DB::rollBack();
             return redirect()->back()->withInput()->withErrors(['error' => 'Ha ocurrido un error al actualizar el usuario. Por favor, inténtalo de nuevo.']);
@@ -90,7 +97,9 @@ class UserController extends Controller
             DB::beginTransaction();
             $user->delete();
             DB::commit();
-            return redirect()->route('admin_panel')->with('success', 'Usuario eliminado correctamente!');
+            return redirect()->route('admin_panel')->with([
+                'success' => 'Usuario eliminado correctamente!',
+                'tab' => '2',]);
         } catch (Exception $e) {
             DB::rollBack();
             return redirect()->back()->withInput()->withErrors(['error' => 'Ha ocurrido un error al eliminar el usuario. Por favor, inténtalo de nuevo.']);

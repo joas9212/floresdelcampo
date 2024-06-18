@@ -5,7 +5,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{__('Bienvenido ') . Auth::user()->name}}
+            {{__('Editar Pedido')}}
         </h2>
     </x-slot>
 
@@ -88,6 +88,24 @@
                                         <div class="form-floating">
                                             <input type="datetime-local" name="fecha_envio" class="form-control" placeholder="Fecha de envio" id="es_inputDateSend" value="{{ date('Y-m-d\TH:i', strtotime($pedido->fecha_envio)) }}" required>
                                             <label for="es_inputDateSend">Fecha de envio</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-floating">
+                                            @if(Auth::user()->rol == 'Administrador' || Auth::user()->rol == 'Aliado')
+                                                <select class="form-control @error('estado') is-invalid @enderror" id="es_EstateOrder" name="estado" required>
+                                                    <option value="Procesando" {{ $pedido->estado == 'Procesando' ? 'selected' : '' }}>Procesando</option>
+                                                    <option value="Preparando" {{ $pedido->estado == 'Preparando' ? 'selected' : '' }}>Preparando</option>
+                                                    <option value="Transito" {{ $pedido->estado == 'Transito' ? 'selected' : '' }}>Transito</option>
+                                                    <option value="Entregado" {{ $pedido->estado == 'Entregado' ? 'selected' : '' }}>Entregado</option>
+                                                </select>
+                                                <label for="es_Estate">Estado del pedido</label>
+                                                @error('estado')
+                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

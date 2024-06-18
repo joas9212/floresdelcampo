@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->enum('rol', ['Vendedor', 'Administrador', 'Aliado'])->default('Vendedor');
+            $table->string('phone')->nullable();
+            $table->decimal('saldo', 15, 2)->default(0)->nullable(false);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

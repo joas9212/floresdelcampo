@@ -2,15 +2,17 @@
     use App\Models\Producto;
     use App\Models\Ciudad;
     use App\Models\MetodoPago;
+    use App\Models\User;
     $productos = Producto::all();
     $ciudades = Ciudad::all();
     $metodosPago = MetodoPago::all();
+    $aliados = User::where('rol', 'Aliado')->get();
 @endphp
 
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{__('Bienvenido ') . Auth::user()->name}}
+            {{__('Editar venta')}}
         </h2>
     </x-slot>
 
@@ -68,19 +70,45 @@
                                     <div class="col-md-6 col-12">
                                         <div class="form-floating mb-3">
                                             @if(Auth::user()->rol == 'Administrador')
-                                                <select class="form-control" id="es_Estate" name="estado_venta" required>
+                                                <select class="form-control @error('estado_venta') is-invalid @enderror" id="es_Estate" name="estado_venta" required>
                                                     <option value="" disabled>Seleccionar</option>
                                                     <option value="Pendiente" {{ $venta->estado == 'Pendiente' ? 'selected' : '' }}>Pendiente</option>
                                                     <option value="Aprobada" {{ $venta->estado == 'Aprobada' ? 'selected' : '' }}>Aprobada</option>
                                                     <option value="Rechazada" {{ $venta->estado == 'Rechazada' ? 'selected' : '' }}>Rechazada</option>
                                                 </select>
                                                 <label for="es_Estate">Estado de la venta</label>
+                                                @error('estado_venta')
+                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
                                             @endif
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 col-12">
+                                        <div class="form-floating mb-3">
+                                            <div class="form-floating mb-3">
+                                                @if(Auth::user()->rol == 'Administrador')
+                                                    <select class="form-control @error('id_partner') is-invalid @enderror" id="es_inputIdPartner" name="id_partner">
+                                                        @if(!empty($venta->pedido->user))
+                                                            <option value="" >Seleccionar</option>
+                                                            @foreach ($aliados as $aliado)
+                                                                <option value="{{ $aliado->id }}" {{ $venta->pedido->user->id == $aliado->id ? 'selected' : '' }}>{{ $aliado->name }}</option>
+                                                            @endforeach
+                                                        @else
+                                                            <option value="" >Seleccionar</option>
+                                                            @foreach ($aliados as $aliado)
+                                                                <option value="{{ $aliado->id }}">{{ $aliado->name }}</option>
+                                                            @endforeach
+                                                        @endif
+                                                    </select>
+                                                    <label for="es_inputIdPartner">Aliado asignado</label>
+                                                    @error('id_partner')
+                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                @endif
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-floating mb-3">

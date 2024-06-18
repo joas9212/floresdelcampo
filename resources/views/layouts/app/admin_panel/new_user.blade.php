@@ -1,14 +1,3 @@
-@if (session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
-@if (session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
-    </div>
-@endif
-
 <form method="POST" action="{{ route('users.store') }}" enctype="multipart/form-data">
     @csrf
     <div class="form-group mb-4" style="font-size: 12px">

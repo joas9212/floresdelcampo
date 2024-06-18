@@ -76,7 +76,7 @@ class VentasController extends Controller
             $pedido->observaciones = $request->input('observaciones');
             $pedido->fecha_envio = $request->input('fecha_envio');
             $pedido->costo_envio = $request->input('costo_envio');
-            $pedido->estado = $request->input('estado', 'Pendiente');
+            $pedido->estado = $request->input('estado', 'Procesando');
             $pedido->save();
 
             // Guardar los comprobantes de pago
@@ -114,6 +114,25 @@ class VentasController extends Controller
 
     public function update(Request $request, Venta $venta)
     {
+        if($request->input('estado_venta') == 'Aprobada'){
+            $request->validate([
+                'id_partner' => 'required|numeric|min:1',
+            ]);
+        }
+
+        if ($request->input('id_partner') != null) {
+            $request->validate([
+                'estado_venta' => [
+                    'required',
+                    function ($attribute, $value, $fail) {
+                        if ($value !== 'Aprobada') {
+                            $fail('El estado de la venta debe ser Aprobada cuando hay un Aliado Asignado.');
+                        }
+                    },
+                ],
+            ]);
+        }
+
         try {
             DB::beginTransaction();
 
@@ -147,6 +166,7 @@ class VentasController extends Controller
                 $pedido = new Pedido();
                 $pedido->venta_id = $venta->id;
             }
+            $pedido->user_id = $request->input('id_partner', null);
             $pedido->ciudad_id = $request->input('ciudad_id');
             $pedido->nombre_destinatario = $request->input('nombre_destinatario');
             $pedido->numero_contacto_destinatario = $request->input('numero_contacto_destinatario');

@@ -46,6 +46,7 @@ class PedidosController extends Controller
     {
         try {
             DB::beginTransaction();
+
             $pedido->update($request->all());
             
             DB::commit();

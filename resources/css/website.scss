@@ -137,7 +137,6 @@ $color_borde_primario: #e5e5e5;
 /* FIN DE ESTILOS HEADER */
 
 /* INICIO DE ESTILOS NAV */
-
 nav {
   top: 0; 
   width: 100%; 
@@ -147,16 +146,21 @@ nav {
   text-transform: uppercase;
 }
 
-nav>div{
+nav>div {
   background-color: $color_bg_primario;
   max-height: 66px;
 }
 
-#button_home{
+#button_home {
   background-color: $color_primario;
   color: $color_texto_secundario;
   text-decoration: none;
   max-height: 66px;
+}
+
+#menu-toggle {
+  display: none;
+  cursor: pointer;
 }
 
 nav ul {
@@ -179,7 +183,7 @@ nav ul a > li {
   border-right: 1px solid #dee2e6; 
 }
 
-nav ul a:hover > li{
+nav ul a:hover > li {
   color: $color_primario;
 }
 
@@ -191,16 +195,90 @@ nav ul a:hover > li::after {
   display: block;
 }
 
-nav ul a:last-child > li{
+nav ul a:last-child > li {
   border-right: none; 
 }
 
-nav + hr{
-  top:66px; 
+nav + hr {
+  top: 66px; 
   color: $color_primario;
   opacity: 0.9;
   border-width: 4px;    
   width: 100%;
+}
+
+#bg-white-fullwidth {
+  opacity: 0;
+  visibility: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 66px; 
+  background-color: $color_bg_primario;
+  z-index: 1; 
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+    display: none;
+    background-color: white; /* Fondo blanco para el menú */
+    width: 100%; /* Asegura que el fondo blanco cubra todo el ancho */
+    position: fixed; /* Hace que el menú se superponga sobre otros contenidos */
+    top: 66px; /* Ajusta según la altura de tu navbar */
+    left: 0;
+    z-index: 1000; /* Asegura que el menú se superponga sobre otros elementos */
+  }
+
+  #NavlinkHome {
+    display: none;
+  }
+  
+  #menu-toggle {
+    display: block;
+    position: fixed;
+    top: 33px;
+    left: 1rem;
+    transform: translateY(-50%);
+    z-index: 1001; /* Asegura que el icono esté por encima del fondo blanco */
+  }
+  
+  #menu-toggle svg {
+    stroke: white;
+  }
+
+
+  nav ul.show {
+    display: flex;
+  }
+  
+  nav ul a > li {
+    border-right: none;
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  nav ul a:last-child > li {
+    border-bottom: none;
+  }
+
+  /* Fondo blanco detrás del menú */
+  .menu-background {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white; /* Fondo blanco */
+    z-index: 999; /* Justo debajo del menú */
+  }
+
+  .menu-background.show {
+    display: block; /* Mostrar cuando el menú está desplegado */
+  }
+
 }
 /* FIN DE ESTILOS NAV */
 
@@ -364,6 +442,13 @@ nav + hr{
 
 #website_main_section_store_aside > .website_main_section_store_aside_filters > ul a:hover{
   color: $color_primario;
+}
+
+
+@media (max-width: 768px) {
+  .website_main_section_store_aside_filters{
+    width: 96% !important;
+  }
 }
 
 /* FIN DE ESTILOS SECTION SECTION STORE*/

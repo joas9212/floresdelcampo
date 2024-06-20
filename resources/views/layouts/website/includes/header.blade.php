@@ -2,9 +2,9 @@
 
     <div id="website_header_menu" class="row pt-2 pb-2">
         
-        <div class="col-3"></div>
-        <div class="col-6"></div>
-        <div class="col-3 text-end float-end">
+        <div class="col-3 col-s-3 col-sm-3"></div>
+        <div class="col-3 col-s-3 col-sm-6"></div>
+        <div class="col-6 col-s-6 col-sm-3 text-end float-end">
             @if (Route::has('login'))
                 <ul class="row m-0 p-0 text-end">
                     @auth

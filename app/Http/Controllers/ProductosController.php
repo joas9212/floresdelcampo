@@ -3,15 +3,80 @@
 namespace App\Http\Controllers;
 
 use App\Models\Producto;
+use App\Models\Ciudad;
+use App\Models\Categoria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ProductosController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $productos = Producto::all();
-        return view('productos.index', compact('productos'));
+        // Obtener los parámetros de la solicitud
+        $priceRange = $request->input('price_range');
+        $category = $request->input('category');
+        $city = $request->input('city');
+
+        // Inicializar consulta de productos
+        $productos = Producto::query();
+
+        // Aplicar filtros según el rango de precios seleccionado
+        if ($priceRange) {
+            switch ($priceRange) {
+                case '0-50000':
+                    $productos->where('precio', '>=', 0)->where('precio', '<=', 50000);
+                    break;
+                case '50000-100000':
+                    $productos->where('precio', '>=', 50000)->where('precio', '<=', 100000);
+                    break;
+                case '100000-150000':
+                    $productos->where('precio', '>=', 100000)->where('precio', '<=', 150000);
+                    break;
+                case '200000+':
+                    $productos->where('precio', '>=', 200000);
+                    break;
+            }
+        }
+
+        // Aplicar filtro por categoría
+        if ($category) {
+            switch ($category) {
+                case 'all':
+                    break;
+                case 'Todas':
+                    break;
+                default:
+                    $productos->whereHas('categorias', function($query) use ($category) {
+                        $query->where('nombre', $category);
+                    });
+                    break;
+            }
+        }
+
+        // Aplicar filtro por ciudad
+        if ($city) {
+            switch ($city) {
+                case 'all':
+                    break;
+                case 1:
+                    break;
+                default:
+                    $productos->whereHas('ciudades', function($query) use ($city) {
+                        $query->where('ciudades.id', $city); // Especificar la tabla 'ciudades'
+                    });
+                    break;
+            }
+        }
+
+        // Obtener la colección paginada de productos
+        $productos = $productos->paginate(15);
+
+        return view('welcome', [
+            'productos' => $productos,
+            'priceRange' => $priceRange,
+            'category' => $category,
+            'city' => $city,
+        ]);
     }
 
     public function create()

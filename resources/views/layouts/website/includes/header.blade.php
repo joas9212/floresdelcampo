@@ -2,14 +2,22 @@
 
     <div id="website_header_menu" class="row pt-2 pb-2">
         
-        <div class="col-3"></div>
-        <div class="col-6"></div>
-        <div class="col-3 text-end float-end">
-            <ul class="row m-0 p-0 text-end">
-                <li class="col-4"><a href="{{route('home')}}">Track Order</a></li>
-                <li class="col-4"><a href="{{route('home')}}">Login</a></li>
-                <li class="col-4"><a href="{{route('home')}}">Register</a></li>
-            </ul>
+        <div class="col-3 col-s-3 col-sm-3"></div>
+        <div class="col-3 col-s-3 col-sm-6"></div>
+        <div class="col-6 col-s-6 col-sm-3 text-end float-end">
+            @if (Route::has('login'))
+                <ul class="row m-0 p-0 text-end">
+                    @auth
+                        <li class="col-4"><a href="{{route('dashboard')}}">dashboard</a></li>
+                    @else
+                        <li class="col-4"><a href="{{route('login')}}">Login</a></li>
+
+                        @if (Route::has('register'))
+                        <li class="col-4"><a href="{{route('register')}}">Register</a></li>
+                        @endif
+                    @endauth
+                </ul>
+            @endif
         </div>
     </div>
  
@@ -18,7 +26,7 @@
 
         <div id="logo" class="col-6 text-center">
             <a href="{{route('home')}}">
-                <img class="w-25" src="{{ asset('img/logo rediseñado.png') }}" alt="logo">
+                <img class="w-25" src="{{ asset('img/logo original rediseñado.png') }}" alt="logo">
             </a>
         </div>
 

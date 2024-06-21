@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MetodoPago;
 use Illuminate\Http\Request;
 
 class MetodosPagoController extends Controller
 {
     public function index()
     {
-        $metodos_pago = MetodoPago::all();
-        return view('metodos_pago.index', compact('metodos_pago'));
+        return MetodoPago::all();
     }
 
     public function create()

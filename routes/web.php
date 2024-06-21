@@ -10,6 +10,7 @@ use App\Http\Controllers\PedidosController;
 use App\Http\Controllers\PaisesController;
 use App\Http\Controllers\CiudadesController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\MetodosPagoController;
 use App\Http\Controllers\CategoriasController;
 use Illuminate\Support\Facades\Route;
 
@@ -39,7 +40,6 @@ Route::get('/dashboard', function () {
 Route::get('/new_product', function () {
     return view('layouts.app.new_product');
 })->middleware(['auth', 'verified', 'admin'])->name('new_product');
-//})->middleware(['auth', 'verified', 'admin'])->name('new_product');
 
 Route::get('/register_sale', function () {
     return view('layouts.app.register_sale');
@@ -79,6 +79,7 @@ Route::resource('ventas',  VentasController::class);
 Route::get('/ventasById', [VentasController::class, 'indexById'])->name('ventas.indexById');
 Route::resource('/users', UserController::class);
 Route::resource('/categorias', CategoriasController::class);
+Route::resource('metodosPago',  MetodosPagoController::class);
 
 
 require __DIR__.'/auth.php';

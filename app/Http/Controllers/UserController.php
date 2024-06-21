@@ -11,8 +11,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $usuarios = User::all();
-        return view('usuarios.index', compact('usuarios'));
+        return User::with(['ventas', 'pedidos'])->get();
     }
 
     public function create()

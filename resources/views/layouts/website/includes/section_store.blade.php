@@ -76,7 +76,7 @@
                     @foreach ($productos as $product)
                     <div class="product_card m-2 p-0">
                         <div class="w-100 product_card_img">
-                            <a href="#"><img width="100%" height="100%" src="{{ asset('img/mock.jpg') }}"></a>
+                            <a href="#"><img width="100%" height="100%" src="{{ asset('storage/' . $product->imagenes[0]->ruta) }}"></a>
                         </div>
                         <div class="w-100 product_card_info">
                             <h1>{{ $product->nombre }}</h1>

@@ -50,7 +50,7 @@ class User extends Authenticatable
         return $this->hasMany(Venta::class);
     }
 
-    public function pedido()
+    public function pedidos()
     {
         return $this->hasMany(Pedido::class);
     }

@@ -71,7 +71,6 @@
                                         <div class="form-floating mb-3">
                                             @if(Auth::user()->rol == 'Administrador')
                                                 <select class="form-control @error('estado_venta') is-invalid @enderror" id="es_Estate" name="estado_venta" required>
-                                                    <option value="" disabled>Seleccionar</option>
                                                     <option value="Pendiente" {{ $venta->estado == 'Pendiente' ? 'selected' : '' }}>Pendiente</option>
                                                     <option value="Aprobada" {{ $venta->estado == 'Aprobada' ? 'selected' : '' }}>Aprobada</option>
                                                     <option value="Rechazada" {{ $venta->estado == 'Rechazada' ? 'selected' : '' }}>Rechazada</option>

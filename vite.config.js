@@ -22,6 +22,7 @@ export default defineConfig({
           '@bootstrap': 'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js',
           '@select2_css': 'node_modules/select2/dist/css/select2.min.css',
           '@select2': 'node_modules/select2/dist/js/select2.min.js',
+          '@chartjs': 'node_modules/chart.js/auto/auto.js',
         },
       },
 });

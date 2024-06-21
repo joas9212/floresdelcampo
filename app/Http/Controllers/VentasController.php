@@ -14,8 +14,7 @@ class VentasController extends Controller
 {
     public function index()
     {
-        $ventas = Venta::all();
-        return view('ventas.index', compact('ventas'));
+        return Venta::with(['producto', 'user', 'cliente', 'metodo_pago', 'ciudad', 'pedido', 'comprobantes'])->get();
     }
 
     public function indexById(Request $request)
@@ -154,7 +153,7 @@ class VentasController extends Controller
             $venta->valor_total = $request->input('valor_total');
             $venta->metodo_pago_id = $request->input('metodo_pago_id');
             $venta->ciudad_id = $request->input('ciudad_id');
-            $venta->estado = $request->input('estado_venta');
+            $venta->estado = $request->input('estado_venta', $venta->estado);
             $venta->save();
 
             // Actualizar o crear pedido asociado

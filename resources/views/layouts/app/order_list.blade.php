@@ -105,6 +105,7 @@
                                                     @if (Auth::user()->rol == 'Administrador' 
                                                         or (Auth::user()->rol == 'Aliado' and ($order->user == Auth::user() and ($key == 'Pedidos Asignados a mi' or $key == 'Pedido') and $order->venta->estado == 'Aprobada')))
                                                         <a href="{{ route('pedidos.edit', $order->id) }}" class="btn btn-primary">Editar</a>
+                                                        <a href="{{ url('/generate-pdf',  $order->id) }}" class="btn btn-primary">Generar</a>
                                                     @else
                                                         No permitido
                                                     @endif

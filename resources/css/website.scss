@@ -1,0 +1,487 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+@import "bootstrap/scss/bootstrap";
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/utilities";
+
+$all-colors: map-merge-multiple($blues, $indigos, $purples, $pinks, $reds, $oranges, $yellows, $greens, $teals, $cyans);
+
+$utilities: map-merge(
+  $utilities,
+  (
+    "color": map-merge(
+      map-get($utilities, "color"),
+      (
+        values: map-merge(
+          map-get(map-get($utilities, "color"), "values"),
+          (
+            $all-colors
+          ),
+        ),
+      ),
+    ),
+    "background-color": map-merge(
+      map-get($utilities, "background-color"),
+      (
+        values: map-merge(
+          map-get(map-get($utilities, "background-color"), "values"),
+          (
+            $all-colors
+          ),
+        ),
+      ),
+    ),
+    "border-color": map-merge(
+      map-get($utilities, "border-color"),
+      (
+        values: map-merge(
+          map-get(map-get($utilities, "border-color"), "values"),
+          (
+            $all-colors
+          ),
+        ),
+      ),
+    ),
+  )
+);
+
+@import "bootstrap/scss/utilities/api";
+
+
+/* PREPARAR EL SITIO - CONFIGURACION INICIAL */
+
+// COLORES DE LA PALETA DE COLORES  
+$color_primario: #E4C344;
+$color_bg_primario: $gray-100;
+$color_bg_secundario: #25252e; // #16161d
+$color_bg_terciario: $gray-100;
+$color_texto_primario: #717171;
+$color_texto_secundario: #ffffff;
+$color_borde_primario: #e5e5e5;
+
+#website_main {
+  height: auto;
+  background-color: $color_bg_secundario;
+}
+
+* {
+    padding: 0%;
+    margin: 0%;
+    font-family: 'Raleway', sans-serif;
+    text-decoration: none;
+}
+
+
+
+/* INICIO DE ESTILOS HEADER */
+
+#website_header_menu ul , #website_header_menu a {
+  color: $color_texto_secundario;
+  list-style: none;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+#website_header_head {
+  align-items: center;;
+}
+
+#website_header_head #logo svg{
+  fill: black
+}
+
+#website_header_cart_contain , #website_header_cart_sticky_contain{
+  top: 0; 
+  height: 40px;
+}
+
+#website_header_cart_contain a, #website_header_cart_sticky_contain a{
+  height: 40px;
+  text-decoration: none;
+}
+
+#website_header_cart_icon, #website_header_cart_sticky_icon {
+  width: 45px;
+  align-items: center;
+  justify-content: center;
+  fill:$color_primario;
+  background-color: white;
+}
+
+#website_header_cart_status, #website_header_cart_sticky_status {
+  font-family: 'Open Sans', sans-serif;
+  width: 170px;
+  min-width: 150px;
+  align-items: center;
+  justify-content: center;
+  background-color: $color_primario;
+  font-size: 12px;
+  color: $color_texto_secundario;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+#website_header_cart_sticky_contain {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.6s, visibility 0.6s;
+  right: 45px;
+  z-index: 1010;
+}
+
+/* FIN DE ESTILOS HEADER */
+
+/* INICIO DE ESTILOS NAV */
+nav {
+  top: 0; 
+  width: 100%; 
+  z-index: 1000; 
+  font-weight: bold;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+nav>div {
+  background-color: $color_bg_primario;
+  max-height: 66px;
+}
+
+#button_home {
+  background-color: $color_primario;
+  color: $color_texto_secundario;
+  text-decoration: none;
+  max-height: 66px;
+}
+
+#menu-toggle {
+  display: none;
+  cursor: pointer;
+}
+
+nav ul {
+  list-style: none;
+  display: flex; 
+  justify-content: center; 
+  padding: 0; 
+  margin: 0; 
+}
+
+nav ul li {
+  display: inline-block;
+  text-align: center; 
+  transition: color 0.5s;
+}
+
+nav ul a > li {
+  text-decoration: none;
+  color: $color_texto_primario;
+  border-right: 1px solid #dee2e6; 
+}
+
+nav ul a:hover > li {
+  color: $color_primario;
+}
+
+nav ul a:hover > li::after {
+  content: url(data:image/svg+xml;base64,PHN2ZyBjbGFzcz0idy02IGgtNiB0ZXh0LWdyYXktODAwIGRhcms6dGV4dC13aGl0ZSIgYXJpYS1oaWRkZW49InRydWUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjE1IiBoZWlnaHQ9IjE1IiBmaWxsPSIjY2Y4ZDJlIiB2aWV3Qm94PSIwIDAgMjQgMjQiPg0KICA8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik01LjU3NSAxMy43MjlDNC41MDEgMTUuMDMzIDUuNDMgMTcgNy4xMiAxN2g5Ljc2MmMxLjY5IDAgMi42MTgtMS45NjcgMS41NDQtMy4yNzFsLTQuODgxLTUuOTI3YTIgMiAwIDAgMC0zLjA4OCAwbC00Ljg4IDUuOTI3WiIgY2xpcC1ydWxlPSJldmVub2RkIi8+DQo8L3N2Zz4NCg==);
+  position: absolute;
+  top: 80%;
+  left: 42%;
+  display: block;
+}
+
+nav ul a:last-child > li {
+  border-right: none; 
+}
+
+nav + hr {
+  top: 66px; 
+  color: $color_primario;
+  opacity: 0.9;
+  border-width: 4px;    
+  width: 100%;
+}
+
+#bg-white-fullwidth {
+  opacity: 0;
+  visibility: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 66px; 
+  background-color: $color_bg_primario;
+  z-index: 1; 
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+    display: none;
+    background-color: white; /* Fondo blanco para el menú */
+    width: 100%; /* Asegura que el fondo blanco cubra todo el ancho */
+    position: fixed; /* Hace que el menú se superponga sobre otros contenidos */
+    top: 66px; /* Ajusta según la altura de tu navbar */
+    left: 0;
+    z-index: 1000; /* Asegura que el menú se superponga sobre otros elementos */
+  }
+
+  #NavlinkHome {
+    display: none;
+  }
+  
+  #menu-toggle {
+    display: block;
+    position: fixed;
+    top: 33px;
+    left: 1rem;
+    transform: translateY(-50%);
+    z-index: 1001; /* Asegura que el icono esté por encima del fondo blanco */
+  }
+  
+  #menu-toggle svg {
+    stroke: white;
+  }
+
+
+  nav ul.show {
+    display: flex;
+  }
+  
+  nav ul a > li {
+    border-right: none;
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  nav ul a:last-child > li {
+    border-bottom: none;
+  }
+
+  /* Fondo blanco detrás del menú */
+  .menu-background {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white; /* Fondo blanco */
+    z-index: 999; /* Justo debajo del menú */
+  }
+
+  .menu-background.show {
+    display: block; /* Mostrar cuando el menú está desplegado */
+  }
+
+}
+/* FIN DE ESTILOS NAV */
+
+
+/* INICIO DE ESTILOS SECTION SLIDER*/
+
+#website_main_section_slider {
+  background-color: $color_bg_terciario;
+}
+
+#website_main_section_slider_content{
+  padding-bottom: 30px;
+}
+
+#website_main_section_slider_best_sellers{
+  font-family: 'Raleway', sans-serif;
+  font-size: 12px;
+}
+/* FIN DE ESTILOS SECTION SECTION SLIDER*/
+
+
+/* INICIO DE ESTILOS SECTION STORE*/
+#website_main_section_store {
+  background-color: $color_bg_terciario; 
+}
+
+#website_main_section_store_content {
+  background-color: white;
+  border: 1px solid $color_borde_primario;
+  width: 95% !important;
+}
+
+#website_main_section_store_content_row {
+  justify-content: center;
+}
+
+#website_main_section_store_content_row > .product_card {
+  flex: 0 0 222px; //390
+  height: 390px;
+  max-height: 390px;
+  border: 1px solid $color_borde_primario;
+  border-radius: 10px 10px 0 0;
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+#website_main_section_store_content_row > .product_card > .product_card_img{ 
+  height: 55%;
+  overflow: hidden;
+}
+
+#website_main_section_store_content_row > .product_card img{
+  object-fit: fill;
+  object-position: center;
+  transition: transform 0.4s ease;
+}
+
+#website_main_section_store_content_row > .product_card img:hover{
+  transform: scale(1.2);
+}
+
+#website_main_section_store_content_row .product_card > .product_card_info{
+  position: relative;
+  height: 45%;
+  font-family: 'Raleway', sans-serif;
+  font-size: 13px;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+#website_main_section_store_content_row .product_card > .product_card_info > button{
+  width: 100%; 
+  color: $color_texto_primario; 
+  background-color: transparent;
+  border-top: 1px solid $color_borde_primario;
+  border-left: none;
+  border-bottom: none;
+  border-right: none;
+  padding: 10px; 
+  text-align: center; 
+  text-decoration: none; 
+  display: inline-block;
+  cursor: pointer; 
+  position: absolute;
+  bottom: 0px;
+  transition: all 0.4s ease;
+}
+
+#website_main_section_store_content_row .product_card > .product_card_info h1 {
+  font-size: 14px;
+  padding-top: 20px;
+  letter-spacing: 0.5px;
+  transition: all 0.4s ease;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+}
+
+#website_main_section_store_content_row .product_card > .product_card_info p {
+  font-size: 16px;
+  padding-top: 25px;
+  letter-spacing: 0.5px;
+  transition: all 0.4s ease;
+  width: 100%;
+  text-align: center;
+}
+
+#website_main_section_store_content_row .product_card:hover > .product_card_info h1{
+  color: $color_primario;
+}
+
+#website_main_section_store_content_row .product_card:hover > .product_card_info button {
+  color: $color_primario;
+  background-color: $color_primario;
+  color: white;
+  font-weight: bold;
+}
+
+#website_main_section_store_aside {
+  position: relative;
+  font-family: 'Raleway', sans-serif;
+  font-size: 13px;
+  user-select: none;
+}
+
+#website_main_section_store_aside > .website_main_section_store_aside_filters{
+  border: 1px solid $color_borde_primario; 
+}
+
+#website_main_section_store_aside > .website_main_section_store_aside_filters > h1{
+  font-size: 13px;
+  border-bottom: 1px solid $color_borde_primario;
+  padding: 10px;
+  text-transform: uppercase;
+}
+
+#website_main_section_store_aside > .website_main_section_store_aside_filters > ul{
+  list-style: none;
+  text-decoration: none;
+  padding: 0px;
+}
+
+#website_main_section_store_aside > .website_main_section_store_aside_filters > ul > li > a{
+  width: 100%;
+  display: block;
+  padding-left: 20px;
+  padding-bottom: 2px;
+  padding-top: 2px;
+}
+
+#website_main_section_store_aside > .website_main_section_store_aside_filters > ul{
+  list-style: none;
+  text-decoration: none;
+  padding: 0px;
+}
+
+#website_main_section_store_aside > .website_main_section_store_aside_filters > ul a{
+  list-style: none;
+  text-decoration: none;
+  color: $color_texto_primario;
+}
+
+#website_main_section_store_aside > .website_main_section_store_aside_filters > ul a:hover{
+  color: $color_primario;
+}
+
+
+@media (max-width: 768px) {
+  .website_main_section_store_aside_filters{
+    width: 96% !important;
+  }
+}
+
+/* FIN DE ESTILOS SECTION SECTION STORE*/
+
+
+/* INICIO DE ESTILOS FOOTER */
+
+footer {
+  background-color: $color_bg_secundario;
+  padding: 20px 0;
+  color: $color_texto_secundario;
+  font-size: 14px;
+  border-top: 1px solid $color_primario;
+  text-decoration: none;
+  font-style: none;
+  list-style: none;
+}
+
+footer a, footer li{
+  color: white;
+  text-decoration: none;
+  font-style: none;
+  line-height: 25px;
+}
+
+footer #logo {
+  align-items: center;
+  justify-content: center;
+}
+
+#container_rows_info>.row{
+  margin-left: 22px;
+  margin-right: auto;
+}
+
+/* FIN DE ESTILOS FOOTER */

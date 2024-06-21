@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+@import "bootstrap/scss/bootstrap";
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/utilities";
+@import "bootstrap/scss/bootstrap-reboot";
+@import "bootstrap/scss/bootstrap-reboot";
+@import "select2/dist/css/select2";
+
+
+// COLORES DE LA PALETA DE COLORES  
+$color_primario: #E4C344;
+$color_bg_primario: $gray-100;
+$color_bg_secundario: #25252e; // #16161d
+$color_bg_terciario: $gray-100;
+$color_texto_primario: #717171;
+$color_texto_secundario: #ffffff;
+$color_borde_primario: #e5e5e5;
+
+#component_logo{
+    width: 100px;
+}
+
+.nav-link{
+    color: $color_texto_primario;
+    &:hover{
+        color: $color_primario;
+    }
+    font-size: 14px;
+}
+
+
+.nav-pills {
+    .nav-link.active,
+    .show > .nav-link {
+      color: $color_texto_secundario;
+      @include gradient-bg(black);
+    }
+  }
+
+.btn-primary{
+    background-color: $color_primario;
+    border-color: $color_bg_primario;
+}
+
+.btn-primary:hover{
+    background-color: #cbaf3e;
+    border-color: #cbaf3e;
+}
+
+#btn_send_new_product, #es_btn_enter_sale , #btn-primary-me{
+    background-color: $color_bg_secundario;
+    color: $color_texto_secundario;
+}
+
+.form-control:focus {
+    border-color: $color_primario  !important;
+    box-shadow: 0 0 0 0.2rem rgba(228, 195, 68, 0.25);
+}
+
+
+.select2-container--default .select2-selection--multiple{
+    border-color: #dee2e6;
+}
+
+.select2-container--default.select2-container--focus .select2-selection--multiple{
+    border-color: $color_primario  !important;
+    box-shadow: 0 0 0 0.2rem rgba(228, 195, 68, 0.25);
+}
+
+#inputPrice[type=number]::-webkit-outer-spin-button,
+#inputPrice[type=number]::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+}

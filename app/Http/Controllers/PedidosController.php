@@ -10,8 +10,7 @@ class PedidosController extends Controller
 {
     public function index()
     {
-        $pedidos = Pedido::all();
-        return view('pedidos.index', compact('pedidos'));
+        return Pedido::with(['venta','user','ciudad'])->get();;
     }
 
     public function indexById(Request $request)

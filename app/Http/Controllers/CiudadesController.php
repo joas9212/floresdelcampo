@@ -9,8 +9,7 @@ class CiudadesController extends Controller
 {
     public function index()
     {
-        $ciudades = Ciudad::all();
-        return view('ciudades.index', compact('ciudades'));
+        return Ciudad::with(['productos', 'pedidos', 'venta'])->get();
     }
 
     public function create()

@@ -25,7 +25,7 @@ class Ciudad extends Model
 
     public function pedidos()
     {
-        return $this->belongsToMany(Pedido::class);
+        return $this->HasMany(Pedido::class);
     }
 
     public function venta()

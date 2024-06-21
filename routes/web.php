@@ -13,6 +13,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\MetodosPagoController;
 use App\Http\Controllers\CategoriasController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PDFController;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,5 +82,6 @@ Route::resource('/users', UserController::class);
 Route::resource('/categorias', CategoriasController::class);
 Route::resource('metodosPago',  MetodosPagoController::class);
 
+Route::get('/generate-pdf/{order_id}', [PDFController::class, 'generatePDF']);
 
 require __DIR__.'/auth.php';
